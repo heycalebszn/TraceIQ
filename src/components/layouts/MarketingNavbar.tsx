@@ -14,10 +14,8 @@ import { useState } from "react";
 
 const items = [
   { name: "Home", link: "#home" },
-  { name: "Features", link: "#features" },
   { name: "How it Works", link: "#how" },
   { name: "Demo", link: "#demo" },
-  { name: "Docs", link: "https://github.com/your-repo" },
 ];
 
 export const MarketingNavbar = () => {
