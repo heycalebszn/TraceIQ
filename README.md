@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Trace IQ - Julia OS
 
-## Getting Started
+## 🚀 Features
 
-First, run the development server:
+### 🔥 Hero Section
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Beautiful background interaction (`HeroHighlight`) using radial hover effects.
+- Eye-catching gradient highlight animations (`Highlight`).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 💡 How It Works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Step-by-step explanation** of the agent’s process:
+  - 🧠 Agent Activated – Reads and analyzes the transaction hash.
+  - 🔍 Path Traced – Follows the transaction across wallets, bridges, and mixers.
+  - 📊 Risk Scored – Returns a summary with suspicious activity flags.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🧾 Transaction Hash Input
 
-## Learn More
+- Custom animated input field (`PlaceholdersAndVanishInput`)
+- Cycles through placeholder suggestions with smooth transitions.
+- Disintegrating canvas effect when user hits Enter/Submit.
 
-To learn more about Next.js, take a look at the following resources:
+### 📈 Result Section (After Analysis)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Conditionally rendered after input and analysis trigger.
+- Includes:
+  - **Transaction Details** (from, to, token, value)
+  - **Agent Summary** (AI-generated conclusion)
+  - **Graph Visualization** using `@xyflow/react`
+  - **Loading Spinner** for realistic feedback
+  - **Download Report** button (PDF/JSON download support soon)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🧠 Transaction Graph
 
-## Deploy on Vercel
+- Built with `React Flow` (via `@xyflow/react`)
+- Displays sample flow of transaction path with animations
+- Fully customizable and ready for dynamic data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🧾 Download Report
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Placeholder for exporting results as PDF or JSON
+- Mock button provided (`alert`) — ready to be connected to real export logic
+
+### ❤️ Footer
+
+- Simple, clean footer:
+  > _Made with ❤️ by Julia OS._
