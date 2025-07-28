@@ -6,7 +6,7 @@ import { NavbarButton } from "@/components/ui/resizable-navbar";
 export const Hero = () => {
   return (
     <HeroHighlight>
-      <div className="text-center max-w-3xl mx-auto space-y-8">
+      <div className="text-center max-w-7xl mx-auto space-y-8">
         <h1 className="text-4xl sm:text-6xl font-bold text-black dark:text-white">
           <Highlight>Trace blockchain transactions</Highlight> across chains with AI.
         </h1>
