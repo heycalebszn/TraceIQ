@@ -9,6 +9,7 @@ import {
   TransactionInput,
   TransactionData,
 } from "@/components/layouts/TransactionInput";
+import { Footer } from "@/components/layouts/Footer";
 
 export default function Home() {
   const [result, setResult] = useState<TransactionData | null>(null);
@@ -21,6 +22,7 @@ export default function Home() {
         <HowItWorksSection />
         <TransactionInput onAnalyze={setResult} />
         <ResultSection visible={!!result} data={result || undefined} />
+        <Footer />
       </div>
     </>
   );
