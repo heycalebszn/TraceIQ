@@ -1,25 +1,27 @@
+"use client";
+
+import { useState } from "react";
 import { MarketingNavbar } from "@/components/layouts/MarketingNavbar";
 import { Hero } from "@/components/layouts/Hero";
 import { HowItWorksSection } from "@/components/layouts/HowItWorksSection";
 import { ResultSection } from "@/components/layouts/ResultSection";
+import {
+  TransactionInput,
+  TransactionData,
+} from "@/components/layouts/TransactionInput";
 
 export default function Home() {
+  const [result, setResult] = useState<TransactionData | null>(null);
+
   return (
-    <div className="flex flex-col space-y-10">
+    <>
       <MarketingNavbar />
-      <Hero />
-      <HowItWorksSection />
-      <ResultSection
-        visible={true}
-        data={{
-          from: "0x123...",
-          to: "0x456...",
-          value: "1.5 ETH",
-          token: "ETH",
-          summary:
-            "This transaction is part of a larger pattern involving multiple wallets.",
-        }}
-      />
-    </div>
+      <div className="flex flex-col space-y-10">
+        <Hero />
+        <HowItWorksSection />
+        <TransactionInput onAnalyze={setResult} />
+        <ResultSection visible={!!result} data={result || undefined} />
+      </div>
+    </>
   );
 }

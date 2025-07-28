@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { TransactionGraph } from "@/components/layouts/TransactionGraph";
 import { Node, Edge } from "@xyflow/react";
+import { NavbarButton } from "../ui/resizable-navbar";
+import jsPDF from "jspdf";
 
 interface ResultSectionProps {
   visible: boolean;
@@ -38,6 +40,37 @@ export const ResultSection = ({ visible, data }: ResultSectionProps) => {
   }, [visible]);
 
   if (!visible || !data) return null;
+
+  function downloadReport(data: ResultSectionProps["data"], format: "pdf" | "json") {
+  if (!data) return;
+
+  if (format === "json") {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "transaction-report.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  if (format === "pdf") {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("Transaction Report", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`From: ${data.from}`, 20, 40);
+    doc.text(`To: ${data.to}`, 20, 50);
+    doc.text(`Value: ${data.value}`, 20, 60);
+    doc.text(`Token: ${data.token}`, 20, 70);
+    doc.text("Summary:", 20, 85);
+    doc.text(data.summary, 20, 95, { maxWidth: 170 });
+
+    doc.save("transaction-report.pdf");
+  }
+}
 
   return (
     <section className="w-full mt-15 px-6 py-16 bg-black">
@@ -96,14 +129,11 @@ export const ResultSection = ({ visible, data }: ResultSectionProps) => {
           )}
         </motion.div>
 
-        {/* Download */}
+   
         <div className="text-center">
-          <button
-            className="mt-4 rounded-lg bg-white px-6 py-2 text-black font-medium shadow-md hover:bg-neutral-800 transition"
-            onClick={() => alert("Download started (mock).")}
-          >
+          <NavbarButton   onClick={() => downloadReport(data, "pdf")}>
             Download Report
-          </button>
+          </NavbarButton>
         </div>
       </div>
     </section>
