@@ -11,11 +11,11 @@ export const Hero = () => {
           <Highlight>Trace blockchain transactions</Highlight> across chains with AI.
         </h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-400">
-          Detect risks. Investigate addresses. Visualize fund flows with JuliaOS agents.
+          Input a hash. Let our agents reveal the story behind the transaction with JuliaOS agents.
         </p>
         <div className="flex justify-center">
-          <NavbarButton href="#demo" variant="dark">
-            Try Demo
+          <NavbarButton href="#trace" variant="dark">
+            Try Now
           </NavbarButton>
         </div>
       </div>
