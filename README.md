@@ -1,4 +1,4 @@
-## Trace IQ - Julia OS
+## Trace IQ - Blockchain Transaction Analysis Platform
 
 A sophisticated blockchain transaction analysis platform powered by AI agents for compliance and forensic investigation.
 
@@ -6,7 +6,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 
 ### 🔥 AI-Powered Analysis
 
-- **JuliaOS Integration** - Advanced AI agents specialized in blockchain forensics
+- **AI Agent Integration** - Multiple AI service options including Julep AI platform
 - **Multi-Network Support** - Ethereum, Bitcoin, BSC, and more
 - **Real-time Risk Assessment** - Comprehensive risk scoring from 0-100
 - **Intelligent Pattern Recognition** - Detects mixers, sanctions, and suspicious activities
@@ -35,7 +35,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 
 ### 🧠 Advanced AI Features
 
-- **JuliaOS Agents** - Specialized blockchain forensics AI
+- **Multiple AI Service Options** - Julep AI, Mock Service, or Custom Integration
 - **Risk Pattern Detection** - Identifies money laundering and compliance risks
 - **Path Tracing** - Tracks funds across multiple hops and networks
 - **Compliance Reporting** - Generates professional reports for regulatory use
@@ -81,35 +81,54 @@ npm run dev
 
 ## 🔧 Configuration
 
-### Required API Keys
+### AI Service Options
 
-1. **JuliaOS** (Required)
-- Get your configuration from [https://docs.juliaos.com/](https://docs.juliaos.com/)
-- Add to `JULIAOS_HOST` and `JULIAOS_PORT`
+**Option 1: Mock AI Service (Default)**
+- Perfect for development and testing
+- No external API keys required
+- Provides realistic mock analysis results
 
-2. **Blockchain Providers** (Choose one or more)
-   - Etherscan: [https://etherscan.io/apis](https://etherscan.io/apis)
-   - Alchemy: [https://alchemy.com](https://alchemy.com)
-   - Infura: [https://infura.io](https://infura.io)
+**Option 2: Julep AI Platform (Recommended for Production)**
+- Real AI-powered analysis
+- Sign up at [Julep AI](https://docs.julep.ai/)
+- Add `JULEP_API_KEY` to your environment
 
-3. **Risk Analysis** (Optional)
-   - OKLink: [https://www.oklink.com](https://www.oklink.com)
+**Option 3: Custom AI Service**
+- Integrate with your own AI service
+- Configure `CUSTOM_AI_HOST` and `CUSTOM_AI_PORT`
+
+### Required Blockchain API Keys
+
+Choose one or more blockchain data providers:
+
+1. **Etherscan**: [https://etherscan.io/apis](https://etherscan.io/apis)
+2. **Alchemy**: [https://alchemy.com](https://alchemy.com)
+3. **Infura**: [https://infura.io](https://infura.io)
+
+### Optional Services
+
+- **OKLink**: Enhanced risk analysis [https://www.oklink.com](https://www.oklink.com)
+- **BSCScan**: For BSC network support
 
 See `setup-guide.md` for detailed configuration instructions.
 
 ## 🧪 Testing
 
+### Health Check
+Visit `/api/health` to verify all services are running properly.
+
+### Mock Analysis (Default)
+- No setup required
+- Provides realistic simulated results
+- Perfect for development and testing
+
 ### Production Analysis
 Enter any valid transaction hash from supported networks for comprehensive analysis.
 
-### Real Transactions
-Use actual transaction hashes from supported networks:
+### Example Transaction Hashes for Testing
 - Ethereum: Get from [Etherscan](https://etherscan.io)
 - Bitcoin: Get from [Blockchain.info](https://blockchain.info)
 - BSC: Get from [BscScan](https://bscscan.com)
-
-### Health Check
-Visit `/api/health` to verify all services are running.
 
 ## 🏗️ Architecture
 
@@ -125,9 +144,9 @@ Backend API Routes
 └── Real-time blockchain integration
 
 AI & Data Services
-├── JuliaAgentService - AI analysis
-├── BlockchainService - Multi-network data
-└── AnalysisService - Orchestration
+├── AI Service (Julep/Mock/Custom) - Analysis and risk scoring
+├── BlockchainService - Multi-network data fetching
+└── AnalysisService - Service orchestration
 ```
 
 ## 📊 Supported Networks
@@ -166,13 +185,44 @@ POST /api/analyze
 GET /api/health
 ```
 
+Returns service status, configuration, and connectivity information.
+
 ## 🚀 Production Deployment
 
 1. Set environment to production
-2. Configure rate limiting
-3. Set up monitoring
-4. Secure API key management
-5. Enable caching for blockchain data
+2. Configure real AI service (Julep recommended)
+3. Set up blockchain API keys
+4. Configure rate limiting
+5. Set up monitoring
+6. Secure API key management
+
+## 🛠️ Development Guide
+
+### AI Service Configuration
+
+The platform supports three AI service modes:
+
+1. **Mock Service** (`USE_MOCK_AI_SERVICE=true`)
+   - No external dependencies
+   - Realistic simulated results
+   - Perfect for development
+
+2. **Julep AI** (`JULEP_API_KEY=your_key`)
+   - Real AI analysis
+   - Production-ready
+   - Advanced pattern recognition
+
+3. **Custom Service** (`CUSTOM_AI_HOST=localhost`)
+   - Integrate your own AI
+   - Flexible configuration
+   - Custom analysis logic
+
+### Adding New Blockchain Networks
+
+1. Extend `BlockchainService` with new network support
+2. Add network configuration to environment
+3. Update frontend network selector
+4. Test with real transactions
 
 ## 🤝 Contributing
 
@@ -202,6 +252,9 @@ This project is licensed under the MIT License.
 
 ## 🎯 Roadmap
 
+- [x] Multiple AI service integration options
+- [x] Mock service for development
+- [x] Comprehensive error handling
 - [ ] Additional blockchain networks
 - [ ] Advanced ML risk models
 - [ ] Real-time monitoring dashboards
@@ -211,4 +264,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Made with ❤️ by Julia OS**
+**Built with ❤️ using Next.js, TypeScript, and modern AI technologies**

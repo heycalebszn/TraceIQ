@@ -30,7 +30,7 @@ export interface BlockchainTransaction {
 
 export interface RiskAnalysis {
   riskScore: number;
-  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'SEVERE';
+  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
   flags: string[];
   summary: string;
   details: {
@@ -88,7 +88,7 @@ export interface AnalysisResponse {
 // Additional types for better type safety
 export interface AddressRiskData {
   address: string;
-  level: 'LOW' | 'MEDIUM' | 'HIGH' | 'SEVERE';
+  level: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
   riskScore: number;
   associateBlackAddresses: string;
   interactionTime: string;
@@ -97,6 +97,7 @@ export interface AddressRiskData {
     category: string;
     value: string;
   }>;
+  [key: string]: unknown; // Index signature for compatibility
 }
 
 export interface BitcoinTransactionInput {
