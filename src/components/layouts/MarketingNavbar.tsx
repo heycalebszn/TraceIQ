@@ -15,7 +15,7 @@ import { useState } from "react";
 const items = [
   { name: "Home", link: "#home" },
   { name: "How it Works", link: "#how" },
-  { name: "Demo", link: "#demo" },
+  { name: "Analysis", link: "#analysis" },
 ];
 
 export const MarketingNavbar = () => {
@@ -26,8 +26,8 @@ export const MarketingNavbar = () => {
       <NavBody>
         <NavbarLogo />
         <NavItems items={items} />
-        <NavbarButton href="#demo" variant="dark">
-          Try Demo
+        <NavbarButton href="#analysis" variant="dark">
+          Try Analysis
         </NavbarButton>
       </NavBody>
 
@@ -50,7 +50,7 @@ export const MarketingNavbar = () => {
               {item.name}
             </a>
           ))}
-          <NavbarButton href="#demo" className="mt-2 w-full">
+          <NavbarButton href="#analysis" className="mt-2 w-full">
             Try
           </NavbarButton>
         </MobileNavMenu>

@@ -96,37 +96,19 @@ export const TransactionInput = ({
     } catch (error) {
       console.error('Error analyzing transaction:', error);
       const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
-      
-      // Provide fallback data for demo purposes if API fails
-      if (txHash.toLowerCase().includes('demo') || txHash.toLowerCase().includes('test')) {
-        const fallbackData: TransactionData = {
-          from: "0xAlice",
-          to: "0xBob",
-          value: "5.2 ETH",
-          token: "ETH",
-          summary: "Demo transaction - Funds passed through Tornado Cash before landing on 0xBob. Risk Score: 87/100.",
-          hash: txHash,
-          riskScore: 87,
-          riskLevel: "HIGH",
-          flags: ["MIXER_DETECTED", "HIGH_RISK_TRANSACTION"],
-          aiSummary: "This is a demo transaction showing high-risk patterns including mixer usage."
-        };
-        onAnalyze(fallbackData, false);
-      } else {
-        onAnalyze(null, false, errorMessage);
-      }
+      onAnalyze(null, false, errorMessage);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full px-4" id="demo">
+    <div className="w-full px-4" id="analysis">
       <PlaceholdersAndVanishInput
         placeholders={[
           "Enter transaction hash...",
           "0x123abc...",
-          "Try &lsquo;demo&rsquo; for a test analysis",
+          "Enter a transaction hash to analyze",
           "Supports ETH, BTC, BSC networks"
         ]}
         onChange={handleChange}
@@ -143,10 +125,10 @@ export const TransactionInput = ({
         </div>
       )}
 
-      {/* Demo instructions */}
+      {/* Analysis instructions */}
       <div className="mt-4 text-sm text-gray-500 text-center">
-        <p>💡 Try entering &ldquo;demo&rdquo; or &ldquo;test&rdquo; for a sample analysis</p>
-        <p>Or use a real transaction hash from Ethereum, Bitcoin, or BSC</p>
+        <p>💡 Enter a valid transaction hash from Ethereum, Bitcoin, or BSC networks</p>
+        <p>Analysis includes risk assessment, path tracing, and compliance checks</p>
       </div>
     </div>
   );

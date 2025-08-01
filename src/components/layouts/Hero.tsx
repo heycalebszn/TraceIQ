@@ -16,7 +16,7 @@ export const Hero = () => {
           with JuliaOS agents.
         </p>
         <div className="flex justify-center">
-          <NavbarButton href="#demo" variant="dark">
+          <NavbarButton href="#analysis" variant="dark">
             Try Now
           </NavbarButton>
         </div>

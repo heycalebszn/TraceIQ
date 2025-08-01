@@ -6,7 +6,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 
 ### 🔥 AI-Powered Analysis
 
-- **Julep AI Integration** - Advanced AI agents specialized in blockchain forensics
+- **JuliaOS Integration** - Advanced AI agents specialized in blockchain forensics
 - **Multi-Network Support** - Ethereum, Bitcoin, BSC, and more
 - **Real-time Risk Assessment** - Comprehensive risk scoring from 0-100
 - **Intelligent Pattern Recognition** - Detects mixers, sanctions, and suspicious activities
@@ -23,7 +23,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 - Custom animated input field (`PlaceholdersAndVanishInput`)
 - Real-time API integration with blockchain networks
 - Support for multiple transaction hash formats
-- Demo mode for testing without real transactions
+- Production-ready transaction analysis across multiple networks
 
 ### 📈 Comprehensive Results Dashboard
 
@@ -35,7 +35,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 
 ### 🧠 Advanced AI Features
 
-- **Julep AI Agents** - Specialized blockchain forensics AI
+- **JuliaOS Agents** - Specialized blockchain forensics AI
 - **Risk Pattern Detection** - Identifies money laundering and compliance risks
 - **Path Tracing** - Tracks funds across multiple hops and networks
 - **Compliance Reporting** - Generates professional reports for regulatory use
@@ -83,9 +83,9 @@ npm run dev
 
 ### Required API Keys
 
-1. **Julep AI** (Required)
-   - Get your key at [https://app.julep.ai](https://app.julep.ai)
-   - Add to `JULEP_API_KEY`
+1. **JuliaOS** (Required)
+- Get your configuration from [https://docs.juliaos.com/](https://docs.juliaos.com/)
+- Add to `JULIAOS_HOST` and `JULIAOS_PORT`
 
 2. **Blockchain Providers** (Choose one or more)
    - Etherscan: [https://etherscan.io/apis](https://etherscan.io/apis)
@@ -99,8 +99,8 @@ See `setup-guide.md` for detailed configuration instructions.
 
 ## 🧪 Testing
 
-### Demo Mode
-Enter "demo" or "test" in the transaction input for a sample analysis.
+### Production Analysis
+Enter any valid transaction hash from supported networks for comprehensive analysis.
 
 ### Real Transactions
 Use actual transaction hashes from supported networks:
@@ -125,7 +125,7 @@ Backend API Routes
 └── Real-time blockchain integration
 
 AI & Data Services
-├── JulepAgentService - AI analysis
+├── JuliaAgentService - AI analysis
 ├── BlockchainService - Multi-network data
 └── AnalysisService - Orchestration
 ```
