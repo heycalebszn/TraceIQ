@@ -19,8 +19,8 @@ export async function GET() {
         },
         ai: {
           status: health.ai ? 'up' : 'down',
-          description: 'AI analysis service',
-          details: health.ai ? 'AI service is responding correctly' : 'AI service is unavailable or misconfigured',
+          description: 'JuliaOS AI analysis service',
+          details: health.ai ? 'JuliaOS AI service is responding correctly' : 'JuliaOS AI service is unavailable or misconfigured',
           serviceType: getAIServiceType()
         }
       },
@@ -29,7 +29,7 @@ export async function GET() {
       environment: process.env.NODE_ENV || 'development',
       configuration: {
         usingMockAI: process.env.USE_MOCK_AI_SERVICE === 'true',
-        hasJulepKey: !!process.env.JULEP_API_KEY,
+        hasJuliaOSKey: !!process.env.JULIAOS_API_KEY,
         hasCustomAI: !!process.env.CUSTOM_AI_HOST,
         hasBlockchainKeys: {
           etherscan: !!process.env.ETHERSCAN_API_KEY,
@@ -49,7 +49,7 @@ export async function GET() {
       details: error instanceof Error ? error.message : 'Unknown error occurred',
       services: {
         blockchain: { status: 'unknown', description: 'Unable to check blockchain service status' },
-        ai: { status: 'unknown', description: 'Unable to check AI service status' }
+        ai: { status: 'unknown', description: 'Unable to check JuliaOS AI service status' }
       },
       configuration: {
         environment: process.env.NODE_ENV || 'development',
@@ -62,8 +62,8 @@ export async function GET() {
 function getAIServiceType(): string {
   if (process.env.USE_MOCK_AI_SERVICE === 'true') {
     return 'mock';
-  } else if (process.env.JULEP_API_KEY) {
-    return 'julep';
+  } else if (process.env.JULIAOS_API_KEY) {
+    return 'juliaos';
   } else if (process.env.CUSTOM_AI_HOST) {
     return 'custom';
   } else {
