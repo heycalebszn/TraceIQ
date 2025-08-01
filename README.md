@@ -6,7 +6,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 
 ### 🔥 AI-Powered Analysis
 
-- **AI Agent Integration** - Multiple AI service options including Julep AI platform
+- **AI Agent Integration** - Multiple AI service options including Julia OS AI platform
 - **Multi-Network Support** - Ethereum, Bitcoin, BSC, and more
 - **Real-time Risk Assessment** - Comprehensive risk scoring from 0-100
 - **Intelligent Pattern Recognition** - Detects mixers, sanctions, and suspicious activities
@@ -35,7 +35,7 @@ A sophisticated blockchain transaction analysis platform powered by AI agents fo
 
 ### 🧠 Advanced AI Features
 
-- **Multiple AI Service Options** - Julep AI, Mock Service, or Custom Integration
+- **Multiple AI Service Options** - JuliaOS AI, Mock Service, or Custom Integration
 - **Risk Pattern Detection** - Identifies money laundering and compliance risks
 - **Path Tracing** - Tracks funds across multiple hops and networks
 - **Compliance Reporting** - Generates professional reports for regulatory use
