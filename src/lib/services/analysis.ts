@@ -1,14 +1,14 @@
 import { BlockchainService } from './blockchain';
-import { JuliaAgentService } from './julia-agent';
+import { JuliaOSAgentService } from './juliaos-agent';
 import { AnalysisRequest, AnalysisResponse, AgentAnalysis, AddressRiskData } from '@/types';
 
 export class AnalysisService {
   private blockchainService: BlockchainService;
-  private juliaService: JuliaAgentService;
+  private juliaOSService: JuliaOSAgentService;
 
   constructor() {
     this.blockchainService = new BlockchainService();
-    this.juliaService = new JuliaAgentService();
+    this.juliaOSService = new JuliaOSAgentService();
   }
 
   async analyzeTransaction(request: AnalysisRequest): Promise<AnalysisResponse> {
@@ -60,7 +60,7 @@ export class AnalysisService {
       }
 
           // Step 4: Analyze with JuliaOS AI agent
-    const analysis = await this.juliaService.analyzeTransaction(
+    const analysis = await this.juliaOSService.analyzeTransaction(
         transaction,
         addressRisks.filter((risk): risk is AddressRiskData => risk !== null),
         pathData
@@ -87,7 +87,7 @@ export class AnalysisService {
 
   async getAgentStatus(): Promise<{ status: string; agent?: unknown }> {
     try {
-      const agentInfo = await this.juliaService.getAgentInfo();
+      const agentInfo = await this.juliaOSService.getAgentInfo();
       return {
         status: agentInfo ? 'active' : 'inactive',
         agent: agentInfo
@@ -142,10 +142,10 @@ export class AnalysisService {
 
   private async testAiService(): Promise<boolean> {
     try {
-      const agentInfo = await this.juliaService.getAgentInfo();
+      const agentInfo = await this.juliaOSService.getAgentInfo();
       return agentInfo !== null;
     } catch {
-      console.error('AI service test failed');
+      console.error('JuliaOS AI service test failed');
       return false;
     }
   }
