@@ -166,7 +166,11 @@ export class AnalysisService {
       return baseAnalysis;
     }
 
-    const enhanced = { ...baseAnalysis };
+    const enhanced: AnalysisResponse & {
+      complianceFlags?: string[];
+      reportGenerated?: boolean;
+      alertTriggered?: boolean;
+    } = { ...baseAnalysis };
 
     // Add compliance flags
     if (request.includeCompliance) {
