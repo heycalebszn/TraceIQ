@@ -8,27 +8,31 @@ export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
   onSubmit,
+  disabled = false,
 }: {
   placeholders: string[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  disabled?: boolean;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const startAnimation = () => {
+  
+  const startAnimation = useCallback(() => {
     intervalRef.current = setInterval(() => {
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
     }, 3000);
-  };
-  const handleVisibilityChange = () => {
+  }, [placeholders.length]);
+  
+  const handleVisibilityChange = useCallback(() => {
     if (document.visibilityState !== "visible" && intervalRef.current) {
       clearInterval(intervalRef.current); 
       intervalRef.current = null;
     } else if (document.visibilityState === "visible") {
       startAnimation(); 
     }
-  };
+  }, [startAnimation]);
 
   useEffect(() => {
     startAnimation();
@@ -40,10 +44,10 @@ export function PlaceholdersAndVanishInput({
       }
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [placeholders]);
+  }, [placeholders, handleVisibilityChange, startAnimation]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const newDataRef = useRef<any[]>([]);
+  const newDataRef = useRef<Array<{x: number; y: number; r: number; color: string}>>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
@@ -67,7 +71,7 @@ export function PlaceholdersAndVanishInput({
 
     const imageData = ctx.getImageData(0, 0, 800, 800);
     const pixelData = imageData.data;
-    const newData: any[] = [];
+    const newData: Array<{x: number; y: number; color: [number, number, number, number]}> = [];
 
     for (let t = 0; t < 800; t++) {
       const i = 4 * t * 800;
@@ -172,7 +176,7 @@ export function PlaceholdersAndVanishInput({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     vanishAndSubmit();
-    onSubmit && onSubmit(e);
+    if (onSubmit) onSubmit(e);
   };
   return (
     <form
@@ -193,21 +197,23 @@ export function PlaceholdersAndVanishInput({
         onChange={(e) => {
           if (!animating) {
             setValue(e.target.value);
-            onChange && onChange(e);
+            if (onChange) onChange(e);
           }
         }}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         value={value}
         type="text"
+        disabled={disabled}
         className={cn(
           "w-full relative text-sm sm:text-base z-50 border-none dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-10 pr-20",
-          animating && "text-transparent dark:text-transparent"
+          animating && "text-transparent dark:text-transparent",
+          disabled && "opacity-50 cursor-not-allowed"
         )}
       />
 
       <button
-        disabled={!value}
+        disabled={!value || disabled}
         type="submit"
         className="absolute right-2 top-1/2 z-50 -translate-y-1/2 h-8 w-8 rounded-full disabled:bg-gray-100 bg-black dark:bg-zinc-900 dark:disabled:bg-zinc-800 transition duration-200 flex items-center justify-center"
       >

@@ -111,6 +111,30 @@ Use actual transaction hashes from supported networks:
 ### Health Check
 Visit `/api/health` to verify all services are running.
 
+## 🛠️ Troubleshooting
+
+### Common Issues
+
+**JuliaOS Connection Failed**
+- Ensure your JuliaOS instance is running on the configured host/port
+- Check `JULIAOS_HOST` and `JULIAOS_PORT` in your `.env.local`
+- Verify firewall settings allow connections
+
+**Transaction Not Found**
+- Verify the transaction hash format for the selected network
+- Ensure the transaction exists and is confirmed on the blockchain
+- Check if the API keys for blockchain providers are valid
+
+**API Rate Limits**
+- Some blockchain APIs have rate limits
+- Consider upgrading to paid API plans for higher limits
+- Implement proper caching if needed
+
+**Build Errors**
+- Run `npm install` to ensure all dependencies are installed
+- Check that Node.js version is 18 or higher
+- Clear `.next` folder and rebuild if needed
+
 ## 🏗️ Architecture
 
 ```

@@ -62,8 +62,8 @@ export class AnalysisService {
           // Step 4: Analyze with JuliaOS AI agent
     const analysis = await this.juliaService.analyzeTransaction(
         transaction,
-        addressRisks.filter((risk): risk is AddressRiskData => risk !== null),
-        pathData
+        addressRisks.filter((risk): risk is AddressRiskData => risk !== null) as Array<unknown>,
+        pathData as Array<unknown>
       );
 
       console.log('AI analysis completed:', analysis.riskAnalysis.riskLevel);
@@ -166,7 +166,11 @@ export class AnalysisService {
       return baseAnalysis;
     }
 
-    const enhanced = { ...baseAnalysis };
+    const enhanced: AnalysisResponse & {
+      complianceFlags?: string[];
+      reportGenerated?: boolean;
+      alertTriggered?: boolean;
+    } = { ...baseAnalysis };
 
     // Add compliance flags
     if (request.includeCompliance) {

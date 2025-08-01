@@ -84,7 +84,7 @@ export class JuliaAgentService {
         networks: ["ethereum", "bitcoin", "bsc", "polygon"]
       };
 
-      this.agent = await this.runJuliaCommand('agents.create_agent', agentConfig);
+      this.agent = await this.runJuliaCommand('agents.create_agent', agentConfig) as JuliaAgentData;
       console.log('JuliaOS agent initialized:', this.agent.id);
     } catch (error) {
       console.error('Error initializing JuliaOS agent:', error);
@@ -94,8 +94,8 @@ export class JuliaAgentService {
 
   async analyzeTransaction(
     transaction: BlockchainTransaction,
-    addressRisks: Array<Record<string, unknown>> = [],
-    pathData: Array<Record<string, unknown>> = []
+    addressRisks: Array<unknown> = [],
+    pathData: Array<unknown> = []
   ): Promise<AgentAnalysis> {
     try {
       if (!this.agent) {
@@ -129,7 +129,22 @@ export class JuliaAgentService {
       };
 
       // Execute analysis through JuliaOS
-      const analysisResult = await this.runJuliaCommand('agents.analyze_transaction', analysisRequest);
+      const analysisResult = await this.runJuliaCommand('agents.analyze_transaction', analysisRequest) as {
+        summary?: string;
+        risk_score?: number;
+        risk_level?: string;
+        risk_flags?: string[];
+        risk_summary?: string;
+        mixer_detected?: boolean;
+        sanctioned_addresses?: boolean;
+        high_risk_exchange?: boolean;
+        suspicious_patterns?: boolean;
+        transaction_path?: Array<Record<string, unknown>>;
+        path_length?: number;
+        mixers_in_path?: string[];
+        exchanges_in_path?: string[];
+        ai_summary?: string;
+      };
 
       // Format the response according to our interface
       const analysis: AgentAnalysis = {
@@ -148,7 +163,7 @@ export class JuliaAgentService {
         },
         riskAnalysis: {
           riskScore: analysisResult.risk_score || 0,
-          riskLevel: analysisResult.risk_level || 'LOW',
+          riskLevel: (analysisResult.risk_level as 'LOW' | 'MEDIUM' | 'HIGH' | 'SEVERE') || 'LOW',
           flags: analysisResult.risk_flags || [],
           summary: analysisResult.risk_summary || 'No significant risks detected',
           details: {
@@ -160,11 +175,11 @@ export class JuliaAgentService {
         },
         pathTracing: {
           hops: (analysisResult.transaction_path || []).map((hop: Record<string, unknown>, index: number) => ({
-            from: hop.from || 'Unknown',
-            to: hop.to || 'Unknown',
-            value: hop.value || '0',
-            timestamp: hop.timestamp || Date.now(),
-            riskScore: hop.risk_score || Math.max(0, (analysisResult.risk_score || 0) - (index * 5))
+            from: (hop.from as string) || 'Unknown',
+            to: (hop.to as string) || 'Unknown',
+            value: (hop.value as string) || '0',
+            timestamp: (hop.timestamp as number) || Date.now(),
+            riskScore: (hop.risk_score as number) || Math.max(0, (analysisResult.risk_score || 0) - (index * 5))
           })),
           totalHops: analysisResult.path_length || 0,
           mixersDetected: analysisResult.mixers_in_path || [],
@@ -262,7 +277,11 @@ export class JuliaAgentService {
 
   async getSystemStatus(): Promise<{ status: string; version?: string; uptime?: number }> {
     try {
-      const status = await this.runJuliaCommand('system.get_status', {});
+      const status = await this.runJuliaCommand('system.get_status', {}) as {
+        status?: string;
+        version?: string;
+        uptime?: number;
+      };
       return {
         status: status.status || 'unknown',
         version: status.version,
