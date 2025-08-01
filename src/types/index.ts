@@ -59,7 +59,7 @@ export interface AgentAnalysis {
   aiSummary: string;
 }
 
-export interface JulepAgent {
+export interface JuliaAgent {
   id: string;
   name: string;
   model: string;

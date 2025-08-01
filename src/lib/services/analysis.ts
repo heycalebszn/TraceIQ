@@ -1,14 +1,14 @@
 import { BlockchainService } from './blockchain';
-import { JulepAgentService } from './julep-agent';
+import { JuliaAgentService } from './julia-agent';
 import { AnalysisRequest, AnalysisResponse, AgentAnalysis, AddressRiskData } from '@/types';
 
 export class AnalysisService {
   private blockchainService: BlockchainService;
-  private julepService: JulepAgentService;
+  private juliaService: JuliaAgentService;
 
   constructor() {
     this.blockchainService = new BlockchainService();
-    this.julepService = new JulepAgentService();
+    this.juliaService = new JuliaAgentService();
   }
 
   async analyzeTransaction(request: AnalysisRequest): Promise<AnalysisResponse> {
@@ -59,8 +59,8 @@ export class AnalysisService {
         }));
       }
 
-      // Step 4: Analyze with Julep AI agent
-      const analysis = await this.julepService.analyzeTransaction(
+          // Step 4: Analyze with JuliaOS AI agent
+    const analysis = await this.juliaService.analyzeTransaction(
         transaction,
         addressRisks.filter((risk): risk is AddressRiskData => risk !== null),
         pathData
@@ -87,7 +87,7 @@ export class AnalysisService {
 
   async getAgentStatus(): Promise<{ status: string; agent?: unknown }> {
     try {
-      const agentInfo = await this.julepService.getAgentInfo();
+      const agentInfo = await this.juliaService.getAgentInfo();
       return {
         status: agentInfo ? 'active' : 'inactive',
         agent: agentInfo
@@ -142,7 +142,7 @@ export class AnalysisService {
 
   private async testAiService(): Promise<boolean> {
     try {
-      const agentInfo = await this.julepService.getAgentInfo();
+      const agentInfo = await this.juliaService.getAgentInfo();
       return agentInfo !== null;
     } catch {
       console.error('AI service test failed');

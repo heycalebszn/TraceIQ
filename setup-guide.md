@@ -8,16 +8,17 @@ This guide will help you set up the TraceIQ backend with juliaOS agent integrati
 
 - Node.js 18+ installed
 - API keys for blockchain data providers
-- Julep AI account and API key
+- JuliaOS configuration and access
 
 ## 🔧 Environment Configuration
 
 1. Copy the `.env.local` file and update with your API keys:
 
 ```bash
-# Julep AI Configuration
-JULEP_API_KEY=your_julep_api_key_here
-JULEP_BASE_URL=https://api.julep.ai
+# JuliaOS Configuration
+JULIAOS_HOST=localhost
+JULIAOS_PORT=8052
+JULIAOS_TIMEOUT=30000
 
 # Blockchain API Keys
 ETHERSCAN_API_KEY=your_etherscan_api_key_here
@@ -34,10 +35,10 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ## 🔑 API Key Setup
 
-### 1. Julep AI (Required)
-- Visit [https://app.julep.ai](https://app.julep.ai)
-- Create an account and generate an API key
-- Add the key to `JULEP_API_KEY` in your `.env.local`
+### 1. JuliaOS (Required)
+- Visit [https://docs.juliaos.com/](https://docs.juliaos.com/) for installation
+- Set up your JuliaOS instance following the installation guide
+- Configure connection details in your `.env.local`
 
 ### 2. Blockchain Data Providers (Choose at least one)
 
@@ -80,12 +81,7 @@ npm run dev
 ### Health Check
 Visit [http://localhost:3000/api/health](http://localhost:3000/api/health) to check if all services are running properly.
 
-### Demo Analysis
-1. Go to the main page
-2. Enter "demo" or "test" in the transaction input
-3. This will show a sample analysis without requiring real API calls
-
-### Real Transaction Analysis
+### Production Transaction Analysis
 1. Find a real transaction hash from:
    - [Etherscan](https://etherscan.io) for Ethereum
    - [Blockchain.info](https://blockchain.info) for Bitcoin
@@ -98,14 +94,14 @@ Visit [http://localhost:3000/api/health](http://localhost:3000/api/health) to ch
 ```
 Frontend (Next.js) → API Routes → Services
                                     ├── BlockchainService (fetch tx data)
-                                    ├── JulepAgentService (AI analysis)
+                                    ├── JuliaAgentService (AI analysis)
                                     └── AnalysisService (orchestration)
 ```
 
 ### Key Components
 
 1. **BlockchainService**: Fetches transaction data from various blockchain networks
-2. **JulepAgentService**: Uses Julep AI agents for transaction analysis
+2. **JuliaAgentService**: Uses JuliaOS agents for transaction analysis
 3. **AnalysisService**: Orchestrates the analysis pipeline
 4. **API Routes**: RESTful endpoints for frontend communication
 
@@ -142,8 +138,9 @@ Frontend (Next.js) → API Routes → Services
 
 ### Common Issues
 
-1. **"JULEP_API_KEY environment variable is required"**
-   - Make sure you've added your Julep API key to `.env.local`
+1. **"JuliaOS connection failed"**
+- Make sure your JuliaOS instance is running
+- Verify `JULIAOS_HOST` and `JULIAOS_PORT` in `.env.local`
    - Restart the development server after adding the key
 
 2. **"Transaction not found"**
@@ -153,7 +150,7 @@ Frontend (Next.js) → API Routes → Services
 
 3. **"Analysis service unavailable"**
    - Check your internet connection
-   - Verify Julep API key is valid
+   - Verify JuliaOS configuration is correct
    - Check the health endpoint for service status
 
 ### Debug Mode

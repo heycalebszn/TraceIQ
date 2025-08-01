@@ -18,7 +18,7 @@ export async function GET() {
         },
         ai: {
           status: health.ai ? 'up' : 'down',
-          description: 'Julep AI agent service'
+          description: 'JuliaOS AI agent service'
         }
       },
       agent: agentStatus,
